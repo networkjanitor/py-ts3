@@ -76,6 +76,29 @@ class TS3Commands(object):
         """
         return (command, cparameters, uparameters, options)
 
+    def auth(self, *, apikey):
+        """
+        Usage: 
+            auth apikey={string}
+
+        Authenticates connecting application with API key of user.
+        
+        Example:
+            auth apikey=AAAA-BBBB-CCCC-DDDD-EEEE
+            error id=0 msg=ok
+
+        Example::
+
+            >>> ts3cmd.auth(apikey="AAAA-BBBB-CCCC-DDDD-EEEE")
+            ...
+        """
+        cparams = OrderedDict()
+        uparams = list()
+        options = list()
+
+        cparams["apikey"] = apikey
+        return self._return_proxy("auth", cparams, uparams, options)
+
     def banadd(self, *, ip=None, name=None, uid=None, time=None, banreason=None):
         """
         Usage::

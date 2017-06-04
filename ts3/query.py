@@ -91,18 +91,18 @@ class TS3TimeoutError(TS3Error, TimeoutError):
     """
 
     def __str__(self):
-        tmp = "Could not receive data from the server within the timeout."
+        tmp = "Could not receive data from the endpoint within the timeout."
         return tmp
 
 
 class TS3RecvError(TS3Error):
     """
-    Raised if receiving data from the server failed, because the connection
+    Raised if receiving data from the endpoint failed, because the connection
     was closed or for other reasons.
     """
 
     def __str__(self):
-        tmp = "Could not receive data from the server."
+        tmp = "Could not receive data from the endpoint."
         return tmp
 
 
@@ -388,7 +388,7 @@ class TS3BaseConnection(object):
 
     def send_keepalive(self):
         """
-        Sends an empty query to the server to prevent automatic disconnect.
+        Sends an empty query to the endpoint to prevent automatic disconnect.
         Make sure to call it at least once in 10 minutes.
         """
         self._telnet_conn.write(b"\n\r")
@@ -448,11 +448,11 @@ class TS3BaseConnection(object):
 
 class TS3Connection(TS3BaseConnection, TS3Commands):
     """
-    TS3 server query client.
+    TS3 query client.
 
     This class provides the command wrapper capabilities
     :class:`~commands.TS3Commands` and the ability to handle a
-    connection to a TeamSpeak 3 server of :class:`TS3BaseConnection`.
+    connection to a TeamSpeak 3 query node of :class:`TS3BaseConnection`.
 
     >>> with TS3Connection("localhost") as tsconn:
     ...     # From the TS3Commands class:

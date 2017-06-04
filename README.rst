@@ -100,6 +100,21 @@ You can find more examples in the ``ts3.examples`` package.
 				msg = "Hi {}".format(client["client_nickname"])
 				ts3conn.clientpoke(clid=client["clid"], msg=msg)
 
+*	Say hello to all clients but use it with the ClientQuery plugin instead of a ServerQuery connection:
+
+	.. code-block:: python
+
+		#!/usr/bin/python3
+
+		import ts3
+
+		with ts3.query.TS3Connection("localhost", 25639) as ts3conn:
+			ts3conn.auth(apikey="AAAA-BBBB-CCCC-DDDD-EEEE")
+
+			for client in ts3conn.clientlist():
+				msg = "Hi {}".format(client["client_nickname"])
+				ts3conn.clientpoke(clid=client["clid"], msg=msg)
+
 *	Event handling:
 
 	.. code-block:: python
